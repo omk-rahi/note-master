@@ -1,12 +1,27 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useQuery } from "react-query";
+import { getCurrentUser } from "../services/authServices";
+import { useEffect } from "react";
+import FullPageSpinner from "../components/FullPageSpinner";
 
 const ProtectedRoute = ({ children }) => {
-  const user = null;
+  const navigate = useNavigate();
 
-  if (user) return children;
+  const { data: user, isLoading } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: getCurrentUser,
+  });
 
-  return <Navigate to="/login" replace />;
+  const isAuthenticated = user?.role === "authenticated";
+
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) navigate("/login");
+  }, [isAuthenticated, isLoading, navigate]);
+
+  if (isLoading) return <FullPageSpinner />;
+
+  if (isAuthenticated) return children;
 };
 
 ProtectedRoute.propTypes = {
