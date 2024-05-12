@@ -11,7 +11,7 @@ const Button = ({ children, type, disabled }) => {
 
   return (
     <button
-      className={`flex w-full items-center justify-center gap-2 rounded-md  py-3 ${styles} ring-slate-400 ring-offset-2 transition-all duration-300  focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-600`}
+      className={`flex w-full items-center justify-center gap-2 rounded-md px-4  py-3 ${styles} ring-slate-400 ring-offset-2 transition-all duration-300  focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-600`}
       disabled={disabled}
     >
       {children}
