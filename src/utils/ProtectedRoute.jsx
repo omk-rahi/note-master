@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getCurrentUser } from "../services/authServices";
 import { useEffect } from "react";
 import FullPageSpinner from "../components/FullPageSpinner";

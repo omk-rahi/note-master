@@ -3,12 +3,17 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "../services/noteServices";
+
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const NewNote = () => {
   const [editorValue, setEditorValue] = useState("");
+  const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -23,7 +28,6 @@ const NewNote = () => {
       const note = {
         ...data,
         content: editorValue,
-        userId: "d77cab97-0ed5-49fc-a93a-74e521376c4d",
       };
 
       createNote(note);
@@ -31,6 +35,8 @@ const NewNote = () => {
 
     onSuccess: () => {
       toast.success("Note saved!");
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+      navigate("/notes");
     },
 
     onError: (err) => {

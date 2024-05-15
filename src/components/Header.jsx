@@ -1,7 +1,8 @@
+import { IoMdAdd } from "react-icons/io";
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import Profile from "./Profile";
 import Button from "./Button";
-import { IoMdAdd } from "react-icons/io";
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
         <div className="flex gap-8">
           <Button type="primary">
             <IoMdAdd />
-            <span>New note</span>
+            <Link to="/new">New note</Link>
           </Button>
           <Profile />
         </div>

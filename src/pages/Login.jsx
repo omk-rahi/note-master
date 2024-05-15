@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { IoLogoGoogle } from "react-icons/io5";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { login } from "../services/authServices";
 import Spinner from "../components/Spinner";
@@ -21,7 +21,7 @@ const Login = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ email, password }) => login(email, password),
     onSuccess: () => {
-      navigate("/home");
+      navigate("/notes");
     },
     onError: () => {
       toast.error("Invalid email or password ");
